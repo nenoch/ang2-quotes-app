@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Quote } from './quote.model';
 
 @Component({
@@ -7,7 +7,7 @@ import { Quote } from './quote.model';
   styleUrls: ['./quote.component.css']
 })
 export class QuoteComponent implements OnInit {
-  quote: Quote = new Quote('Be yourself; everyone else is already taken.', 'Oscar Wilde', 12);
+  @Input() quote: Quote;
 
   ngOnInit(){}
 

@@ -1,5 +1,5 @@
 <div class="md-col-8 md-col-offset-2">
   <h2>Quotes page</h2>
   <hr>
-  <app-quote></app-quote>
+  <app-quote [quote]='quote' *ngFor='let quote of quotes'></app-quote>
 </div>
