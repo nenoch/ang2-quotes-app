@@ -5,16 +5,22 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppHeaderNavComponent } from './app-header-nav/app-header-nav.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { QuotesPageComponent } from './quotes-page/quotes-page.component';
+import { routing } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppHeaderNavComponent
+    AppHeaderNavComponent,
+    MainPageComponent,
+    QuotesPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]
