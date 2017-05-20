@@ -3,11 +3,13 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // Get our API routes
 const quotesRoutes = require('./routes/quotes');
 
 const app = express();
+mongoose.connect('localhost:27017/quotes-app-db');
 
 // Parsers for POST data
 app.use(bodyParser.json());
