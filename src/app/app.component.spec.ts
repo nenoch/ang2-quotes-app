@@ -1,6 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { AppHeaderNavComponent } from './app-header-nav/app-header-nav.component';
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
