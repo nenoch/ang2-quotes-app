@@ -8,13 +8,15 @@ import { AppHeaderNavComponent } from './app-header-nav/app-header-nav.component
 import { MainPageComponent } from './main-page/main-page.component';
 import { QuotesPageComponent } from './quotes-page/quotes-page.component';
 import { routing } from './app.routes';
+import { QuoteComponent } from './quote/quote.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderNavComponent,
     MainPageComponent,
-    QuotesPageComponent
+    QuotesPageComponent,
+    QuoteComponent
   ],
   imports: [
     BrowserModule,

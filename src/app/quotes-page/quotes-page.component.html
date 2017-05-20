@@ -1,18 +1,5 @@
 <div class="md-col-8 md-col-offset-2">
   <h2>Quotes page</h2>
   <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <blockquote class="blockquote">
-          <p>{{ quote.content }}</p>
-          <footer>{{ quote.author }}</footer>
-      </blockquote>
-    </div>
-    <div class="col-md-4 text-left">
-      <strong>{{ quote.votes }}</strong>
-      <p>votes</p>
-      <button type='button' class='btn' (click)='voteUp()'>+1</button>
-      <button type='butto' class='btn' (click)='voteDown()'>-1</button>
-    </div>
-  </div>
+  <app-quote></app-quote>
 </div>
