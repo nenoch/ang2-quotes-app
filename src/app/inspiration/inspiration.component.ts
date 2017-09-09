@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-inspiration',
@@ -6,15 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inspiration.component.css']
 })
 export class InspirationComponent implements OnInit {
-  title:string = "Get inspired!";
-  quote:any = {
-    "author":"Marianne Williamson",
-    "content": "Joy is what happens to us when we allow ourselves to recognize how good things really are."
+  private title:string = "Get inspired!";
+  private quote:any = {
+    "quote":"waiting for quote...",
+    "author":"waiting for author..."
   };
 
-  constructor(){}
+  constructor(private apiService:ApiService){}
 
   ngOnInit() {
-  }
-
+    this.apiService.getRandomQuote().
+    subscribe(
+      data => { this.quote = data },
+      error => console.log(error));
+    }
 }

@@ -7,11 +7,11 @@ import { AppComponent } from './app.component';
 import { AppHeaderNavComponent } from './app-header-nav/app-header-nav.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { QuotesPageComponent } from './quotes-page/quotes-page.component';
+import { InspirationComponent } from './inspiration/inspiration.component';
 import { routing } from './app.routes';
 import { QuoteComponent } from './quote/quote.component';
 import { QuotesService } from './quote/quotes.service';
-import { InspirationComponent } from './inspiration/inspiration.component';
-
+import { ApiService } from './inspiration/api.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,10 @@ import { InspirationComponent } from './inspiration/inspiration.component';
     HttpModule,
     routing
   ],
-  providers: [QuotesService],
+  providers: [
+    QuotesService,
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
