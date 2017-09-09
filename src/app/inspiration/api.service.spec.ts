@@ -1,6 +1,7 @@
 import { TestBed, fakeAsync, inject } from '@angular/core/testing';
 import { HttpModule, XHRBackend, ResponseOptions, Response } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from './api.service';
 
@@ -54,5 +55,22 @@ fdescribe('ApiService', () => {
       })
     }));
   });
+
+  // describe('#handleError', () => {
+  //   it('should throw an error when call fails', fakeAsync(() => {
+  //     const apiUrl = 'https://talaikis.com/api/quotes/random/';
+  //
+  //     mockBackend.connections.subscribe(
+  //     (connection:MockConnection) => {
+  //       expect(connection.request.url).toBe(apiUrl);
+  //       connection.mockError(new Error('You broke the internet.'));
+  //     })
+  //
+  //     spyOn(Observable, 'throw')
+  //     service.getRandomQuote().subscribe(res => {
+  //       expect(console.log).toHaveBeenCalled();
+  //     })
+  //   }));
+  // });
 
 });
