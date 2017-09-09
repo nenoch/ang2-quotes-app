@@ -39,9 +39,11 @@ fdescribe('ApiService', () => {
 
   describe('#getRandomQuote', () => {
     it('should return a random quote in json format', fakeAsync(() => {
+      const apiUrl = 'https://talaikis.com/api/quotes/random/';
 
       mockBackend.connections.subscribe(
       (connection:MockConnection) => {
+        expect(connection.request.url).toBe(apiUrl);
         connection.mockRespond(new Response(
           new ResponseOptions({ body: mockResponse })
         ));
