@@ -10,6 +10,7 @@ import { QuotesPageComponent } from './quotes-page/quotes-page.component';
 import { routing } from './app.routes';
 import { QuoteComponent } from './quote/quote.component';
 import { QuotesService } from './quote/quotes.service';
+import { InspirationComponent } from './inspiration/inspiration.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { QuotesService } from './quote/quotes.service';
     AppHeaderNavComponent,
     MainPageComponent,
     QuotesPageComponent,
-    QuoteComponent
+    QuoteComponent,
+    InspirationComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './app-header-nav.component.html',
   styleUrls: ['./app-header-nav.component.css']
 })
-export class AppHeaderNavComponent {
-
-}
+export class AppHeaderNavComponent {}

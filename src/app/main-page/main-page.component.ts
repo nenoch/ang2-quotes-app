@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
-  welcomeMessage = "Welcome";
-  welcomeContent = "Browse through our quotes and vote +1 if you like it, -1 if you don't."
+  welcomeMessage: string = "Welcome";
+  welcomeContent: string = "Browse through our quotes and vote +1 if you like it, -1 if you don't."
 }
