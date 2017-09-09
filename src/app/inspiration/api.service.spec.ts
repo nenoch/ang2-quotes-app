@@ -1,15 +1,56 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, fakeAsync, inject } from '@angular/core/testing';
+import { HttpModule, XHRBackend, ResponseOptions, Response } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { ApiService } from './api.service';
 
-describe('ApiService', () => {
+fdescribe('ApiService', () => {
+
+  let service:ApiService;
+  let mockBackend;
+
+  const mockResponse = {
+    'quote': 'Revenge is often like biting a dog because the dog bit you.',
+    'author': 'Austin O\'Malley\'',
+    'cat': 'anger'
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ApiService]
+      imports: [HttpModule],
+      providers: [
+        {
+          provide: XHRBackend,
+          useClass: MockBackend
+        },
+        ApiService
+      ]
     });
   });
 
-  it('should be created', inject([ApiService], (service: ApiService) => {
-    expect(service).toBeTruthy();
+  beforeEach(inject([ApiService,XHRBackend], (s:ApiService, m:XHRBackend) => {
+    service = s;
+    mockBackend = m;
   }));
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  describe('#getRandomQuote', () => {
+    it('should return a random quote in json format', fakeAsync(() => {
+
+      mockBackend.connections.subscribe(
+      (connection:MockConnection) => {
+        connection.mockRespond(new Response(
+          new ResponseOptions({ body: mockResponse })
+        ));
+      })
+
+      service.getRandomQuote().subscribe(res => {
+        expect(res).toEqual(mockResponse);
+      })
+    }));
+  });
+
 });
