@@ -11,6 +11,14 @@ export class ApiService {
 
   public getRandomQuote(){
     return this.http.get(this.apiUrl)
-    .map((response:Response) => response.json());
+    .map((response:Response) => response.json())
+    .catch((error:Response) => this.handleError(error));
+  }
+
+  private handleError(error:any) {
+    let errorMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.log(errorMsg);
+    return Observable.throw(errorMsg);
   }
 }

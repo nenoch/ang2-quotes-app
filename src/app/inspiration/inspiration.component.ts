@@ -16,9 +16,18 @@ export class InspirationComponent implements OnInit {
   constructor(private apiService:ApiService){}
 
   ngOnInit() {
+    this.getQuote();
+  }
+
+  private getQuote(){
     this.apiService.getRandomQuote().
     subscribe(
       data => { this.quote = data },
-      error => console.log(error));
-    }
+      error => console.log(error)
+    );
+  }
+
+  private onNext(){
+    this.getQuote();
+  }
 }
