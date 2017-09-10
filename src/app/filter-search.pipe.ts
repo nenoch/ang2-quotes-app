@@ -2,10 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Quote } from './quote/quote.model';
 
 @Pipe({
-  name: 'filerSearch',
+  name: 'filterSearch',
   pure: false
 })
-export class FilerSearchPipe implements PipeTransform {
+export class FilterSearchPipe implements PipeTransform {
 
   transform(quotes: Quote[], term:string) {
     if (term === '') {

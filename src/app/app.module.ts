@@ -12,7 +12,7 @@ import { routing } from './app.routes';
 import { QuoteComponent } from './quote/quote.component';
 import { QuotesService } from './quote/quotes.service';
 import { ApiService } from './inspiration/api.service';
-import { FilerSearchPipe } from './filer-search.pipe';
+import { FilterSearchPipe } from './filter-search.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { FilerSearchPipe } from './filer-search.pipe';
     QuotesPageComponent,
     QuoteComponent,
     InspirationComponent,
-    FilerSearchPipe
+    FilterSearchPipe
   ],
   imports: [
     BrowserModule,

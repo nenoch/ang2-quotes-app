@@ -6,5 +6,5 @@
       <input id='search' #searchTerm type="text" class="form-control" (keyup)="search(searchTerm.value)" placeholder="Search by word or author...">
     </div>
   </div>
-  <app-quote [quote]='quote' *ngFor='let quote of quotes | filerSearch:term'></app-quote>
+  <app-quote [quote]='quote' *ngFor='let quote of quotes | filterSearch:term'></app-quote>
 </div>
