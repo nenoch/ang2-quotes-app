@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Quote } from './quote/quote.model';
 
 @Pipe({
   name: 'filterSearch',
@@ -7,13 +6,13 @@ import { Quote } from './quote/quote.model';
 })
 export class FilterSearchPipe implements PipeTransform {
 
-  transform(quotes: Quote[], term:string) {
-    if (term === '') {
-      return quotes;
+  transform(array: any[], term:string) {
+    if (term === null) {
+      return array;
     } else {
-      return quotes.filter(item =>
-        item.content.toLowerCase().includes(term) ||
-        item.author.toLowerCase().includes(term)
+      return array.filter(item =>
+        item.content.toLowerCase().includes(term.toLowerCase()) ||
+        item.author.toLowerCase().includes(term.toLowerCase())
       );
     }
   }

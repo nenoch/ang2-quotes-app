@@ -21,6 +21,6 @@ export class QuotesPageComponent implements OnInit {
   }
 
   search(value:string) {
-    this.term = value.toLowerCase();
+    this.term = value;
   }
 }
