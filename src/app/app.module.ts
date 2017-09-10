@@ -13,6 +13,7 @@ import { QuoteComponent } from './quote/quote.component';
 import { QuotesService } from './quote/quotes.service';
 import { ApiService } from './inspiration/api.service';
 import { FilterSearchPipe } from './filter-search.pipe';
+import { PopularPipe } from './popular.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FilterSearchPipe } from './filter-search.pipe';
     QuotesPageComponent,
     QuoteComponent,
     InspirationComponent,
-    FilterSearchPipe
+    FilterSearchPipe,
+    PopularPipe
   ],
   imports: [
     BrowserModule,

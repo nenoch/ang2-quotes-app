@@ -8,7 +8,7 @@ import { QuotesService } from '../quote/quotes.service';
   styleUrls: ['./quotes-page.component.css']
 })
 export class QuotesPageComponent implements OnInit {
-  private quotes: Quote[];
+  private quotes: Quote[] = [];
   private term:string = '';
 
   constructor(private quotesService: QuotesService){}
