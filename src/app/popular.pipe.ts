@@ -6,11 +6,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PopularPipe implements PipeTransform {
 
-  transform(array: any[]) {
-    let transformed = array;
-    transformed.sort((a,b) => b.votes - a.votes);
-    console.log(transformed);
-    return transformed;
+  transform(array: any[], checked:boolean) {
+    if (checked) {
+      let transformed = array;
+      transformed.sort((a,b) => b.votes - a.votes);
+      return transformed;
+    } else {
+      return array;
+    }
   }
 
 }

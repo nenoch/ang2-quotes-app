@@ -4,8 +4,8 @@
   <div class="row">
       <form class="form-inline">
         <input id='search' #searchTerm type="text" class="form-control" (keyup)="search(searchTerm.value)" placeholder="Search by word or author...">
-        <input class="checkbox-quotes form-check-input" type="checkbox"><span> Order by popularity</span>
+        <input #popCheck class="checkbox-quotes form-check-input" type="checkbox" (change)="reorder(popCheck.checked)"><span> Order by popularity</span>
       </form>
   </div>
-  <app-quote [quote]='quote' *ngFor='let quote of quotes | filterSearch:term'></app-quote>
+  <app-quote [quote]='quote' *ngFor='let quote of quotes | filterSearch:term | popular:check'></app-quote>
 </div>
