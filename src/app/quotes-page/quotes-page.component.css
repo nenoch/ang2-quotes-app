@@ -3,6 +3,12 @@
   margin-bottom: 20px;
 }
 
-.checkbox-quotes {
-  margin-left:20px;
+.btn-popular {
+  background-color: #FAD7A0;
+  margin-bottom:20px;
+}
+
+.btn-popular-active {
+  background-color: #F39C12;
+  margin-bottom:20px;
 }

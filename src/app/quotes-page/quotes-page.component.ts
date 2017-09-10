@@ -11,6 +11,7 @@ export class QuotesPageComponent implements OnInit {
   private quotes: Quote[] = [];
   private term:string = '';
   private check:boolean = false;
+  private clicked:boolean = false;
 
   constructor(private quotesService: QuotesService){}
 
@@ -21,11 +22,15 @@ export class QuotesPageComponent implements OnInit {
     );
   }
 
-  search(value:string) {
+  private search(value:string) {
     this.term = value;
   }
 
-  reorder(value:boolean){
-    this.check = value;
+  private reorder(){
+    this.check = !this.check;
+  }
+
+  private changeStyle(){
+    this.clicked = !this.clicked;
   }
 }
