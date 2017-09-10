@@ -1,5 +1,10 @@
 <div class="md-col-8 md-col-offset-2">
   <h2>Quotes page</h2>
   <hr>
-  <app-quote [quote]='quote' *ngFor='let quote of quotes'></app-quote>
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-sm-6">
+      <input id='search' #searchTerm type="text" class="form-control" (keyup)="search(searchTerm.value)" placeholder="Search by word or author...">
+    </div>
+  </div>
+  <app-quote [quote]='quote' *ngFor='let quote of quotes | filerSearch:term'></app-quote>
 </div>

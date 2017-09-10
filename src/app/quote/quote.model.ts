@@ -8,7 +8,8 @@ export class Quote {
     this.author = author;
     this.votes = votes || 0;
   }
-
+  
+// is this needed?
   voteUp(){
     this.votes += 1;
   }

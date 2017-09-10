@@ -9,8 +9,8 @@ import { ApiService } from './api.service';
 export class InspirationComponent implements OnInit {
   private title:string = "Get inspired!";
   private quote:any = {
-    "quote":"waiting for quote...",
-    "author":"waiting for author..."
+    "quote":"loading quote...",
+    "author":"loading author..."
   };
 
   constructor(private apiService:ApiService){}

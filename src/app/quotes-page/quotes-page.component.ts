@@ -8,7 +8,8 @@ import { QuotesService } from '../quote/quotes.service';
   styleUrls: ['./quotes-page.component.css']
 })
 export class QuotesPageComponent implements OnInit {
-  quotes: Quote[];
+  private quotes: Quote[];
+  private term:string = '';
 
   constructor(private quotesService: QuotesService){}
 
@@ -17,5 +18,9 @@ export class QuotesPageComponent implements OnInit {
     .subscribe(
       (quotes: Quote[]) => { this.quotes = quotes }
     );
+  }
+
+  search(value:string) {
+    this.term = value.toLowerCase();
   }
 }
