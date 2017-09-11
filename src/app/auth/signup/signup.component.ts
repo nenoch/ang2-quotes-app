@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +12,7 @@ export class SignupComponent implements OnInit {
   // reactive form (data-driven)
   signupForm: FormGroup;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -24,6 +26,12 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
+    const user = new User(this.signupForm.value.email,this.signupForm.value.password, this.signupForm.value.username);
+    this.authService.signup(user)
+      .subscribe(
+        data => console.log(data),
+        error => console.error(error)
+      );
     this.signupForm.reset();
   }
 

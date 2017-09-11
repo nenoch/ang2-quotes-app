@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 // Get our routes
 const quotesRoutes = require('./routes/quotes');
-const usersRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 
 const app = express();
 mongoose.connect('localhost:27017/quotes-app-db');

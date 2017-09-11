@@ -14,6 +14,7 @@ import { routing } from './app.routes';
 import { QuoteComponent } from './quote/quote.component';
 import { QuotesService } from './quote/quotes.service';
 import { ApiService } from './inspiration/api.service';
+import { AuthService } from './auth/auth.service';
 import { FilterSearchPipe } from './filter-search.pipe';
 import { PopularPipe } from './popular.pipe';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -44,7 +45,8 @@ import { LogoutComponent } from './auth/logout/logout.component';
   ],
   providers: [
     QuotesService,
-    ApiService
+    ApiService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
