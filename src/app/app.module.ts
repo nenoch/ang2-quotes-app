@@ -8,12 +8,17 @@ import { AppHeaderNavComponent } from './app-header-nav/app-header-nav.component
 import { MainPageComponent } from './main-page/main-page.component';
 import { QuotesPageComponent } from './quotes-page/quotes-page.component';
 import { InspirationComponent } from './inspiration/inspiration.component';
+import { AuthenticationComponent } from './auth/authentication/authentication.component';
+
 import { routing } from './app.routes';
 import { QuoteComponent } from './quote/quote.component';
 import { QuotesService } from './quote/quotes.service';
 import { ApiService } from './inspiration/api.service';
 import { FilterSearchPipe } from './filter-search.pipe';
 import { PopularPipe } from './popular.pipe';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,11 @@ import { PopularPipe } from './popular.pipe';
     QuoteComponent,
     InspirationComponent,
     FilterSearchPipe,
-    PopularPipe
+    PopularPipe,
+    AuthenticationComponent,
+    SignupComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
