@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 // Get our routes
 const quotesRoutes = require('./routes/quotes');
+const usersRoutes = require('./routes/user');
 
 const app = express();
 mongoose.connect('localhost:27017/quotes-app-db');
@@ -28,6 +29,7 @@ app.use(function (req, res, next) {
 
 // Set our routes
 app.use('/quote', quotesRoutes);
+app.use('/user', userRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
