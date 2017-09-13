@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MainPageComponent {
   welcomeMessage: string = "Welcome";
-  welcomeContent: string = "Browse through our quotes and vote +1 if you like it, -1 if you don't."
+  welcomeContent: string = `
+  Browse through our quotes and vote +1 or -1, or create an account and post your own.
+
+  `;
 }
