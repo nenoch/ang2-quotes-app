@@ -26,7 +26,7 @@ router.post('/', function(req, res, next){
 });
 
 router.post('/login', function(req, res, next){
-  User.findOne({email: req.body.email}), function(err, user) {
+  User.findOne({email: req.body.email}, function(err, user) {
     if (err) {
       return res.status(500).json({
         title:'Error occured',
@@ -45,14 +45,14 @@ router.post('/login', function(req, res, next){
         error: {message:'Invalid credentials'}
       });
     }
-    // store the user in the token
+    // store the user in the token and return the token to the application
     var token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
     res.status(200).json({
       message: 'Logged in',
       token:token,
       userId: user._id
     });
-  }
+  });
 });
 
 module.exports = router;
