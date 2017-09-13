@@ -32,6 +32,6 @@ fdescribe('PopularPipe', () => {
         "votes": 12
       }
     ];
-    expect(pipe.transform(data)).toEqual(result);
+    expect(pipe.transform(data, true)).toEqual(result);
   });
 });
