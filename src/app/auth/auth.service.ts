@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor(private http:Http) {}
 
-  signup(user:User){
+  public signup(user:User){
     const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type':'application/json'});
     return this.http.post('http://localhost:3000/user', body, {'headers': headers})
@@ -18,7 +18,7 @@ export class AuthService {
     );
   }
 
-  login(user:User){
+  public login(user:User){
     const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type':'application/json'});
     return this.http.post('http://localhost:3000/user/login', body, {'headers': headers})
@@ -27,7 +27,7 @@ export class AuthService {
     );
   }
 
-  logout(){
+  public logout(){
     localStorage.clear();
   }
 

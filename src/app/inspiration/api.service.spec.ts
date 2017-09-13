@@ -1,7 +1,7 @@
 import { TestBed, fakeAsync, inject } from '@angular/core/testing';
 import { HttpModule, XHRBackend, ResponseOptions, Response } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 
 import { ApiService } from './api.service';
 

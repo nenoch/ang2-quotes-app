@@ -1,8 +1,7 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { HttpModule, XHRBackend, ResponseOptions, Response } from '@angular/http';
+import { TestBed, fakeAsync, inject } from '@angular/core/testing';
+import { HttpModule, XHRBackend, RequestMethod, ResponseOptions, Response } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Observable } from 'rxjs/Observable';
-
+import { User } from './user.model';
 import { AuthService } from './auth.service';
 
 fdescribe('AuthService', () => {
@@ -29,6 +28,31 @@ fdescribe('AuthService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('#signup', () => {
+    it('should create a new user', fakeAsync(() => {
+      mockBackend.connections.subscribe(
+        (connection: MockConnection) => {
+          expect(connection.request.method).toBe(RequestMethod.Post);
+          expect(connection.request.url).toBe('http://localhost:3000/user');
+          connection.mockRespond(new Response(
+            new ResponseOptions({ body:
+              {
+                message: 'Test User created'
+              }
+            })
+          ));
+      })
+
+      const user = new User('test@test.com', '123456', 'test12');
+      service.signup(user).subscribe(res => {
+        expect(res).toBeDefined();
+        expect(res.message).toBe('Test User created');
+      });
+
+
+    }))
   });
 
 });
