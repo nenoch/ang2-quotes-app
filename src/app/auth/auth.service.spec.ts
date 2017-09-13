@@ -39,16 +39,49 @@ fdescribe('AuthService', () => {
           connection.mockRespond(new Response(
             new ResponseOptions({ body:
               {
-                message: 'Test User created'
+                message: 'Test User created',
+                status: 201
               }
             })
           ));
       })
 
-      const user = new User('test@test.com', '123456', 'test12');
+      let user = new User('test@test.com', '123456', 'test12');
       service.signup(user).subscribe(res => {
         expect(res).toBeDefined();
         expect(res.message).toBe('Test User created');
+      });
+
+
+    }))
+  });
+
+  describe('#login', () => {
+    it('should create a new user', fakeAsync(() => {
+      let user = new User('test@test.com', '123456', 'test12');
+      let fakeUserId = 'a0b1c3d4';
+      let token = 'secret';
+
+      mockBackend.connections.subscribe(
+        (connection: MockConnection) => {
+          expect(connection.request.method).toBe(RequestMethod.Post);
+          expect(connection.request.url).toBe('http://localhost:3000/user/login');
+          connection.mockRespond(new Response(
+            new ResponseOptions({ body:
+              {
+                status: 201,
+                message: 'Test Login Success',
+                token: token,
+                userId: fakeUserId
+              }
+            })
+          ));
+      })
+
+      service.login(user).subscribe(res => {
+        expect(res).toBeDefined();
+        expect(res.message).toBe('Test Login Success');
+        expect(res.token).toBe(token);
       });
 
 
