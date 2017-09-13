@@ -2,13 +2,13 @@
   <nav class="col-md-8">
     <ul class="nav nav-tabs">
       <li routerLinkActive='active'>
-        <a [routerLink]="['signup']">Sign up</a>
+        <a [routerLink]="['signup']" *ngIf="!isLoggedIn()">Sign up</a>
       </li>
-      <li routerLinkActive='active'>
+      <li routerLinkActive='active' *ngIf="!isLoggedIn()">
         <a [routerLink]="['login']">Log in</a>
       </li>
-      <li routerLinkActive='active'>
-        <a [routerLink]="['logout']">Log out</a>
+      <li *ngIf="isLoggedIn()">
+        <app-logout></app-logout>
       </li>
     </ul>
   </nav>
