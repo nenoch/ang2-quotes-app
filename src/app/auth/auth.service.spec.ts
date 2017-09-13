@@ -57,7 +57,7 @@ fdescribe('AuthService', () => {
   });
 
   describe('#login', () => {
-    it('should return a token if user exists', fakeAsync(() => {
+    it('should return a token when user exists', fakeAsync(() => {
       let user = new User('test@test.com', '123456');
       let fakeUserId = 'a0b1c3d4';
       let token = 'secret';
@@ -83,9 +83,35 @@ fdescribe('AuthService', () => {
         expect(res.message).toBe('Test Login Success');
         expect(res.token).toBe(token);
       });
-
-
     }))
+  });
+
+  describe('#logout', () => {
+    it('should clear the localStorage', () => {
+      let fakeUserId = 'a0b1c3d4';
+      let fakeToken = 'secret';
+      localStorage.setItem('token', fakeToken);
+      localStorage.setItem('userId', fakeUserId);
+
+      service.logout();
+      expect(localStorage.length).toBe(0);
+      });
+  });
+
+  describe('#isLoggedIn', () => {
+    it('should return true if user logged in', () => {
+      let fakeUserId = 'a0b1c3d4';
+      let fakeToken = 'secret';
+      localStorage.setItem('token', fakeToken);
+      localStorage.setItem('userId', fakeUserId);
+
+      expect(service.isLoggedIn()).toBe(true);
+    });
+
+      it('should return false if user not logged in', () => {
+        service.logout();
+        expect(service.isLoggedIn()).toBe(false);
+      });
   });
 
 });
