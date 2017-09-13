@@ -57,8 +57,8 @@ fdescribe('AuthService', () => {
   });
 
   describe('#login', () => {
-    it('should create a new user', fakeAsync(() => {
-      let user = new User('test@test.com', '123456', 'test12');
+    it('should return a token if user exists', fakeAsync(() => {
+      let user = new User('test@test.com', '123456');
       let fakeUserId = 'a0b1c3d4';
       let token = 'secret';
 
