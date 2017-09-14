@@ -1,13 +1,13 @@
 <div class="col-md-12 margin">
-  <form>
+  <form (ngSubmit)="onSubmit(inputForm)" #inputForm="ngForm">
     <div class="form-group">
       <label for="content">Quote</label>
-      <input #contentInput type="text" id="content" class="form-control">
+      <input ngModel name="content" type="text" id="content" class="form-control" required>
     </div>
     <div class="form-group">
       <label for="author">Author</label>
-      <input #authorInput type="text" id="author" class="form-control">
+      <input ngModel name="author" type="text" id="author" class="form-control" required>
     </div>
-      <button class="btn btn-primary" type="submit" (click)="onSave(contentInput.value, authorInput.value)">Save</button>
+      <button class="btn btn-primary" type="submit">Save</button>
   </form>
 </div>

@@ -1,17 +1,17 @@
 export class Quote {
   content: string;
   author: string;
-  votes: number;
-  username: string;
-  messageId?: string;
+  username?: string;
+  votes?: number;
+  quoteId?: string;
   userId?: string;
 
-  constructor(content: string, author: string, username: string, messageId?: string, userId?: string, votes?: number){
+  constructor(content: string, author: string, username?: string, quoteId?: string, userId?: string, votes?: number){
     this.content = content;
     this.author = author;
     this.votes = votes || 0;
-    this.username = username;
-    this.messageId = messageId;
+    this.username = username || 'hacker';
+    this.quoteId = quoteId;
     this.userId = userId;
   }
 
