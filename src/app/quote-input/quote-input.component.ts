@@ -19,7 +19,6 @@ export class QuoteInputComponent implements OnInit {
 
   onSubmit(form:NgForm){
     const quote = new Quote(form.value.content, form.value.author);
-    console.log("quote object input", quote);
     this.quoteService.addQuote(quote).subscribe(
       data => console.log(data),
       error => console.error(error)

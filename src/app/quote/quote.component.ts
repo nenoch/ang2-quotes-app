@@ -15,7 +15,6 @@ export class QuoteComponent implements OnInit {
   ngOnInit(){}
 
   onDelete(){
-    console.log(this.quote);
     this.quoteService.deleteQuote(this.quote).subscribe(
       data => console.log(data),
       error => console.error(error)
