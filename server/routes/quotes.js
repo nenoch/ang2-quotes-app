@@ -45,4 +45,33 @@ router.post('/', function(req, res, next){
   });
 });
 
+router.delete('/:id', function(req,res,next){
+  Quote.findById(req.params.id, function(err, quote){
+    if (err) {
+      return res.status(500).json({
+        title:'Error occured',
+        error: err
+      });
+    }
+    if (!quote) {
+      return res.status(500).json({
+        title: 'Cannot find quote.',
+        error: {message:'Quote not found'}
+      });
+    }
+    quote.remove(function(err, result){
+      if (err) {
+        return res.status(500).json({
+          title:'Error occured',
+          error: err
+        });
+      }
+      res.status(201).json({
+        message: 'Deleted quote',
+        obj: result
+      });
+    });
+  });
+});
+
 module.exports = router;
