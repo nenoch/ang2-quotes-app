@@ -6,7 +6,7 @@ export class Quote {
   votes?: number;
   userId?: string;
 
-  constructor(content: string, author: string, quoteId?: string, username?: string, userId?: string, votes?: number){
+  constructor(content: string, author: string, quoteId?: string, votes?: number, username?: string, userId?: string){
     this.content = content;
     this.author = author;
     this.votes = votes || 0;

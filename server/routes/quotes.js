@@ -74,4 +74,34 @@ router.delete('/:id', function(req,res,next){
   });
 });
 
+router.patch('/:id', function(req,res,next){
+  Quote.findById(req.params.id, function(err, quote){
+    if (err) {
+      return res.status(500).json({
+        title:'Error occured',
+        error: err
+      });
+    }
+    if (!quote) {
+      return res.status(500).json({
+        title: 'Cannot find quote.',
+        error: {message:'Quote not found'}
+      });
+    }
+    quote.votes = req.body.votes;
+    quote.save(function(err,result){
+      if (err) {
+        return res.status(500).json({
+          title: 'Error occured',
+          error: err
+        });
+      }
+      res.status(201).json({
+        message: 'Updated votes in quote',
+        obj: result
+      });
+    });
+  });
+});
+
 module.exports = router;

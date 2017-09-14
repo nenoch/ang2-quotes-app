@@ -24,10 +24,19 @@ export class QuoteComponent implements OnInit {
 
   voteUp(){
     this.quote.votes += 1;
+    this.updateQuote();
   }
 
   voteDown(){
     this.quote.votes -= 1;
+    this.updateQuote();
+  }
+
+  private updateQuote(){
+    this.quoteService.updateVotes(this.quote).subscribe(
+      data => console.log(data),
+      error => console.error(error)
+    );
   }
 
 }
