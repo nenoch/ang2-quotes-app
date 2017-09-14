@@ -20,6 +20,7 @@ import { PopularPipe } from './popular.pipe';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
+import { QuoteInputComponent } from './quote-input/quote-input.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LogoutComponent } from './auth/logout/logout.component';
     AuthenticationComponent,
     SignupComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    QuoteInputComponent
   ],
   imports: [
     BrowserModule,

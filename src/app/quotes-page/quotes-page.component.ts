@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Quote } from '../quote/quote.model';
+import { AuthService } from '../auth/auth.service';
 import { QuotesService } from '../quote/quotes.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class QuotesPageComponent implements OnInit {
   private check:boolean = false;
   private clicked:boolean = false;
 
-  constructor(private quotesService: QuotesService){}
+  constructor(private quotesService: QuotesService, private authService: AuthService){}
 
   ngOnInit(){
     this.quotesService.getQuotes()
@@ -32,5 +33,9 @@ export class QuotesPageComponent implements OnInit {
 
   private changeStyle(){
     this.clicked = !this.clicked;
+  }
+
+  private isLoggedIn(){
+    return this.authService.isLoggedIn();
   }
 }

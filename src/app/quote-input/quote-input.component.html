@@ -1,0 +1,13 @@
+<div class="col-md-12 margin">
+  <form>
+    <div class="form-group">
+      <label for="content">Quote</label>
+      <input #contentInput type="text" id="content" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input #authorInput type="text" id="author" class="form-control">
+    </div>
+      <button class="btn btn-primary" type="submit" (click)="onSave(contentInput.value, authorInput.value)">Save</button>
+  </form>
+</div>
