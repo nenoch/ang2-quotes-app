@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const User = require('../../models/user.js');
+
 const Quote = require('../../models/quote.js')
 
 router.get('/', function(req, res, next){
@@ -14,35 +16,47 @@ router.get('/', function(req, res, next){
 
 // if the use has not a valid token cannot access the following routes
 
-// router.use('/', function(req,res,next){
-//   jwt.verify(req.query.token, 'secret', function(err, decoded){
-//     if (err) {
-//       res.status(401).json({
-//         title: "Not authenticated user",
-//         error: err
-//       });
-//     }
-//     next();
-//   })
-// });
+router.use('/', function(req,res,next){
+  jwt.verify(req.query.token, 'secret', function(err, decoded){
+    if (err) {
+      return res.status(401).json({
+        title: "Not authenticated user",
+        error: err
+      });
+    }
+    next();
+  })
+});
 
 router.post('/', function(req, res, next){
-  var quote = new Quote({
-    content: req.body.content,
-    author: req.body.author
-  });
-  quote.save(function(err,result){
+  var decoded = jwt.decode(req.query.token);
+  User.findById(decoded.user._id, function(err, user){
     if (err) {
       return res.status(500).json({
         title: 'Error occured',
         error: err
       });
     }
-    res.status(201).json({
-      message: 'Saved quote',
-      obj: result
+    var quote = new Quote({
+      content: req.body.content,
+      author: req.body.author,
+      user: user
     });
-  });
+    quote.save(function(err,result){
+      if (err) {
+        return res.status(500).json({
+          title: 'Error occured',
+          error: err
+        });
+      }
+      user.quotes.push(result);
+      user.save();
+      res.status(201).json({
+        message: 'Saved quote',
+        obj: result
+      });
+    });
+  })
 });
 
 router.delete('/:id', function(req,res,next){

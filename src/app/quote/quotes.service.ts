@@ -26,9 +26,12 @@ export class QuotesService {
 
   public addQuote(quote:Quote){
     this.quotes.push(quote);
+    const token = localStorage.getItem('token')
+      ? `/?token=${localStorage.getItem('token')}`
+      : '';
     const body = JSON.stringify(quote);
     const headers = new Headers({'Content-Type':'application/json'});
-    return this.http.post('http://localhost:3000/quote', body, {'headers':headers})
+    return this.http.post(`http://localhost:3000/quote${token}`, body, {'headers':headers})
       .map((response:Response) => response.json())
       .catch((error:Response)=> Observable.throw(error.json())
     );
@@ -36,16 +39,22 @@ export class QuotesService {
 
   public deleteQuote(quote:Quote){
     this.quotes.splice(this.quotes.indexOf(quote),1);
-    return this.http.delete(`http://localhost:3000/quote/${quote.quoteId}`)
+    const token = localStorage.getItem('token')
+      ? `/?token=${localStorage.getItem('token')}`
+      : '';
+    return this.http.delete(`http://localhost:3000/quote/${quote.quoteId}${token}`)
       .map((response:Response) => response.json())
       .catch((error:Response)=> Observable.throw(error.json())
     );
   }
 
   public updateVotes(quote:Quote){
+    const token = localStorage.getItem('token')
+      ? `/?token=${localStorage.getItem('token')}`
+      : '';
     const body = JSON.stringify(quote);
     const headers = new Headers({'Content-Type':'application/json'});
-    return this.http.patch(`http://localhost:3000/quote/${quote.quoteId}`, body, {'headers':headers})
+    return this.http.patch(`http://localhost:3000/quote/${quote.quoteId}${token}`, body, {'headers':headers})
       .map((response:Response) => response.json())
       .catch((error:Response)=> Observable.throw(error.json())
     );
