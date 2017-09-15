@@ -55,6 +55,31 @@ fdescribe('QuotesService', () => {
     }))
   });
 
+  describe('#updateVotes', () => {
+    it('should create a new quote', fakeAsync(() => {
+      let quote = new Quote("test content 1.", "Author One", "01", 1);
+
+      mockBackend.connections.subscribe(
+        (connection: MockConnection) => {
+          expect(connection.request.method).toBe(RequestMethod.Patch);
+          expect(connection.request.url).toBe(`http://localhost:3000/quote/${quote.quoteId}`);
+          connection.mockRespond(new Response(
+            new ResponseOptions({ body:
+              {
+                message: 'Updated votes in test quote',
+                status: 201
+              }
+            })
+          ));
+      })
+
+      service.updateVotes(quote).subscribe(res => {
+        expect(res).toBeDefined();
+        expect(res.message).toBe('Updated votes in test quote');
+      });
+    }))
+  });
+
   describe('#getQuotes', () => {
     it('should return existing quotes formatted', fakeAsync(() => {
       mockBackend.connections.subscribe(
@@ -98,6 +123,12 @@ fdescribe('QuotesService', () => {
   describe('#deleteQuote', () => {
     it('should delete quote', fakeAsync(() => {
       let quote = new Quote("test content 1.", "Author One", "01", 1);
+      let quotes = [
+        new Quote("test content 1.", "Author One", "01", 1),
+        new Quote("test content 2.", "Author Two", "02", 2)
+      ];
+
+      // console.log("before mock", quotes);
 
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
@@ -111,13 +142,17 @@ fdescribe('QuotesService', () => {
               }
             })
           ));
-      })
-      // add test for splice from existing this.quotes
-      service.deleteQuote(quote).subscribe(res => {
+      });
 
+      // service.quotes = quotes;
+      // console.log("after assignment",service.quotes);
+      service.deleteQuote(quote).subscribe(res => {
         expect(res).toBeDefined();
         expect(res.message).toEqual('Test Quote deleted');
       });
+
+      // expect(service.quotes).not.toContain(quote);
+      // console.log("after function", service.quotes);
     }))
   });
 
