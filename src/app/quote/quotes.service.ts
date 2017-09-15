@@ -49,12 +49,9 @@ export class QuotesService {
   }
 
   public updateVotes(quote:Quote){
-    const token = localStorage.getItem('token')
-      ? `/?token=${localStorage.getItem('token')}`
-      : '';
     const body = JSON.stringify(quote);
     const headers = new Headers({'Content-Type':'application/json'});
-    return this.http.patch(`http://localhost:3000/quote/${quote.quoteId}${token}`, body, {'headers':headers})
+    return this.http.patch(`http://localhost:3000/quote/${quote.quoteId}`, body, {'headers':headers})
       .map((response:Response) => response.json())
       .catch((error:Response)=> Observable.throw(error.json())
     );
