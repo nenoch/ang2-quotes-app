@@ -10,17 +10,9 @@ export class Quote {
     this.content = content;
     this.author = author;
     this.votes = votes || 0;
-    this.username = username || 'hacker';
+    this.username = username;
     this.quoteId = quoteId;
     this.userId = userId;
   }
-
-// is this needed?
-  voteUp(){
-    this.votes += 1;
-  }
-
-  voteDown(){
-    this.votes -= 1;
-  }
+  
 }

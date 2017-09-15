@@ -38,4 +38,8 @@ export class QuoteComponent implements OnInit {
     );
   }
 
+  belongsToUser(){
+    return localStorage.getItem('userId') === this.quote.userId;
+  }
+
 }

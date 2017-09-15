@@ -16,7 +16,14 @@ export class QuotesService {
         const quotes = response.json().obj;
         let formattedQuotes: Quote[] = [];
         for (let quote of quotes) {
-          formattedQuotes.push(new Quote(quote.content, quote.author, quote._id, quote.votes));
+          formattedQuotes.push(new Quote(
+            quote.content,
+            quote.author,
+            quote._id,
+            quote.votes,
+            quote.user.username,
+            quote.user._id
+          ));
         }
         this.quotes = formattedQuotes;
         return formattedQuotes;
@@ -25,14 +32,26 @@ export class QuotesService {
   }
 
   public addQuote(quote:Quote){
-    this.quotes.push(quote);
     const token = localStorage.getItem('token')
       ? `/?token=${localStorage.getItem('token')}`
       : '';
     const body = JSON.stringify(quote);
     const headers = new Headers({'Content-Type':'application/json'});
     return this.http.post(`http://localhost:3000/quote${token}`, body, {'headers':headers})
-      .map((response:Response) => response.json())
+      .map((response:Response) => {
+        const result = response.json();
+        console.log('result', result.obj);
+        const quote = new Quote(
+          result.obj.content,
+          result.obj.author,
+          result.obj._id,
+          result.obj.votes,
+          result.obj.user.username,
+          result.obj.user._id
+        )
+        this.quotes.push(quote);
+        return quote;
+      })
       .catch((error:Response)=> Observable.throw(error.json())
     );
   }

@@ -6,7 +6,9 @@ const User = require('../../models/user.js');
 const Quote = require('../../models/quote.js')
 
 router.get('/', function(req, res, next){
-  Quote.find(function(err, quotes){
+  Quote.find()
+    .populate('user', 'username')
+    .exec(function(err, quotes){
     if (err) {
       return res.status(500).json({title:'Error', error: err});
     }
@@ -44,19 +46,20 @@ router.patch('/:id', function(req,res,next){
   });
 });
 
-// if the use has not a valid token cannot access the following routes
+// if the user has not a valid token cannot access the following routes
+// BLOCKING PATCH ~ FIXING 
 
-router.use('/', function(req,res,next){
-  jwt.verify(req.query.token, 'secret', function(err, decoded){
-    if (err) {
-      return res.status(401).json({
-        title: "Not authenticated user",
-        error: err
-      });
-    }
-    next();
-  })
-});
+// router.use('/', function(req,res,next){
+//   jwt.verify(req.query.token, 'secret', function(err, decoded){
+//     if (err) {
+//       return res.status(401).json({
+//         title: "Not authenticated user",
+//         error: err
+//       });
+//     }
+//     next();
+//   })
+// });
 
 router.post('/', function(req, res, next){
   var decoded = jwt.decode(req.query.token);
@@ -90,6 +93,7 @@ router.post('/', function(req, res, next){
 });
 
 router.delete('/:id', function(req,res,next){
+  var decoded = jwt.decode(req.query.token);
   Quote.findById(req.params.id, function(err, quote){
     if (err) {
       return res.status(500).json({
@@ -101,6 +105,12 @@ router.delete('/:id', function(req,res,next){
       return res.status(500).json({
         title: 'Cannot find quote.',
         error: {message:'Quote not found'}
+      });
+    }
+    if (quote.user !== decoded.user._id){
+      return res.status(401).json({
+        title:'Not authenticated',
+        error: {message: 'User don\'t match.'}
       });
     }
     quote.remove(function(err, result){

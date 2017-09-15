@@ -3,7 +3,7 @@
     <blockquote class="blockquote">
         <p>{{ quote.content }}</p>
         <footer class='margin'>{{ quote.author }}</footer>
-        <button type='button' class='btn btn-primary' (click)='onDelete()'>Delete</button>
+        <button *ngIf='belongsToUser()' type='button' class='btn btn-primary' (click)='onDelete()'>Delete</button>
     </blockquote>
   </div>
   <div class="col-md-4 col-sm-6 text-left">
@@ -11,5 +11,6 @@
       <p>votes</p>
       <button type='button' class='btn' (click)='voteUp()'>+1</button>
       <button type='button' class='btn' (click)='voteDown()'>-1</button>
+      <p class="user-signature">Posted by {{ quote.username }}</p>
   </div>
 </div>
