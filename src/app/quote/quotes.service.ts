@@ -57,12 +57,14 @@ export class QuotesService {
   }
 
   public deleteQuote(quote:Quote){
-    this.quotes.splice(this.quotes.indexOf(quote),1);
     const token = localStorage.getItem('token')
       ? `/?token=${localStorage.getItem('token')}`
       : '';
     return this.http.delete(`http://localhost:3000/quote/${quote.quoteId}${token}`)
-      .map((response:Response) => response.json())
+      .map((response:Response) => {
+        this.quotes.splice(this.quotes.indexOf(quote),1);
+        return response.json();
+      })
       .catch((error:Response)=> Observable.throw(error.json())
     );
   }

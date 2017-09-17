@@ -145,7 +145,6 @@ fdescribe('QuotesService', () => {
   describe('#deleteQuote', () => {
     it('should delete quote', fakeAsync(() => {
       let quote = new Quote("test content 1.", "Author One", "01", 1);
-      console.log(quote.quoteId);
       let quotes = [
         new Quote("test content 1.", "Author One", "01", 1),
         new Quote("test content 2.", "Author Two", "02", 2)
@@ -172,9 +171,9 @@ fdescribe('QuotesService', () => {
       service.deleteQuote(quote).subscribe(res => {
         expect(res).toBeDefined();
         expect(res.message).toEqual('Test Quote deleted');
+        // expect(service.quotes).not.toContain(quote);
       });
 
-      // expect(service.quotes).not.toContain(quote);
       // console.log("after function", service.quotes);
     }))
   });

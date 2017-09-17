@@ -82,7 +82,6 @@ router.post('/', function(req, res, next){
           error: err
         });
       }
-      console.log("backend",result);
       user.quotes.push(result);
       user.save();
       res.status(201).json({
@@ -108,7 +107,7 @@ router.delete('/:id', function(req,res,next){
         error: {message:'Quote not found'}
       });
     }
-    if (quote.user !== decoded.user._id){
+    if (quote.user != decoded.user._id){
       return res.status(401).json({
         title:'Not authenticated',
         error: {message: 'User don\'t match.'}
