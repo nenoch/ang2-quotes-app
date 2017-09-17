@@ -40,17 +40,31 @@ fdescribe('QuotesService', () => {
           connection.mockRespond(new Response(
             new ResponseOptions({ body:
               {
-                message: 'Test Quote created',
-                status: 201
+                obj:
+                  {
+                    "_id":"01",
+                    "content":"test content 1.",
+                    "author":"Author One",
+                    "votes":1,
+                    "user": {
+                      "username": 'test user',
+                      "_id": "abcd",
+                      "password": "test1234",
+                      "email": "test@test.com",
+                      "quotes":[]
+                    }
+                  }
               }
             })
           ));
-      })
+      });
 
-      let quote = new Quote('test content', 'Test Author');
+      let quote = new Quote('test content 1.', 'Author One');
+      let formattedQuote = new Quote("test content 1.", "Author One", "01", 1, "test user", "abcd");
+
       service.addQuote(quote).subscribe(res => {
         expect(res).toBeDefined();
-        expect(res.message).toBe('Test Quote created');
+        expect(res).toEqual(formattedQuote);
       });
     }))
   });
@@ -94,13 +108,21 @@ fdescribe('QuotesService', () => {
                     "_id":"01",
                     "content":"test content 1.",
                     "author":"Author One",
-                    "votes":1
+                    "votes":1,
+                    "user": {
+                      "username": 'test user',
+                      "_id": "abcd"
+                    }
                   },
                   {
                     "_id":"02",
                     "content":"test content 2.",
                     "author":"Author Two",
-                    "votes":2
+                    "votes":2,
+                    "user": {
+                      "username": 'test user',
+                      "_id": "abcd"
+                    }
                   }
                 ]
               }
@@ -111,8 +133,8 @@ fdescribe('QuotesService', () => {
       service.getQuotes().subscribe(res => {
 
         let formatted = [
-          new Quote("test content 1.", "Author One", "01", 1),
-          new Quote("test content 2.", "Author Two", "02", 2)
+          new Quote("test content 1.", "Author One", "01", 1, "test user", "abcd"),
+          new Quote("test content 2.", "Author Two", "02", 2, "test user", "abcd")
         ];
         expect(res).toBeDefined();
         expect(res).toEqual(formatted);
@@ -123,6 +145,7 @@ fdescribe('QuotesService', () => {
   describe('#deleteQuote', () => {
     it('should delete quote', fakeAsync(() => {
       let quote = new Quote("test content 1.", "Author One", "01", 1);
+      console.log(quote.quoteId);
       let quotes = [
         new Quote("test content 1.", "Author One", "01", 1),
         new Quote("test content 2.", "Author Two", "02", 2)

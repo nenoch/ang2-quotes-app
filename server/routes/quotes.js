@@ -47,7 +47,7 @@ router.patch('/:id', function(req,res,next){
 });
 
 // if the user has not a valid token cannot access the following routes
-// BLOCKING PATCH ~ FIXING 
+// BLOCKING PATCH ~ FIXING
 
 // router.use('/', function(req,res,next){
 //   jwt.verify(req.query.token, 'secret', function(err, decoded){
@@ -82,6 +82,7 @@ router.post('/', function(req, res, next){
           error: err
         });
       }
+      console.log("backend",result);
       user.quotes.push(result);
       user.save();
       res.status(201).json({

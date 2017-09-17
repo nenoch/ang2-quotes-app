@@ -1,18 +1,16 @@
-<header class="row">
+<header *ngIf="!isLoggedIn()" class="row">
   <nav class="col-md-8">
     <ul class="nav nav-tabs">
       <li routerLinkActive='active'>
-        <a [routerLink]="['signup']" *ngIf="!isLoggedIn()">Sign up</a>
+        <a [routerLink]="['signup']">Sign up</a>
       </li>
-      <li routerLinkActive='active' *ngIf="!isLoggedIn()">
+      <li routerLinkActive='active'>
         <a [routerLink]="['login']">Log in</a>
-      </li>
-      <li *ngIf="isLoggedIn()">
-        <app-logout></app-logout>
       </li>
     </ul>
   </nav>
 </header>
+<app-logout *ngIf="isLoggedIn()"></app-logout>
 <div class="row">
   <router-outlet></router-outlet>
 </div>

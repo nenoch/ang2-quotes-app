@@ -40,7 +40,6 @@ export class QuotesService {
     return this.http.post(`http://localhost:3000/quote${token}`, body, {'headers':headers})
       .map((response:Response) => {
         const result = response.json();
-        console.log('result', result.obj);
         const quote = new Quote(
           result.obj.content,
           result.obj.author,
@@ -48,11 +47,12 @@ export class QuotesService {
           result.obj.votes,
           result.obj.user.username,
           result.obj.user._id
-        )
+        );
         this.quotes.push(quote);
         return quote;
       })
-      .catch((error:Response)=> Observable.throw(error.json())
+      .catch((error:Response)=> {
+        return Observable.throw(error.json())}
     );
   }
 
