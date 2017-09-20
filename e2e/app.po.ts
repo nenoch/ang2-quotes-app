@@ -13,6 +13,14 @@ export class QuotesAng2Page {
     element(by.linkText(text)).click();
   }
 
+  deleteQuote() {
+    element(by.buttonText('Delete')).click();
+  }
+
+  getNumOfQuotes() {
+    return element.all(by.css('.blockquote')).count();
+  }
+
   signUp() {
     element(by.id('username')).sendKeys("mike");
     element(by.id('email')).sendKeys("mike@mike.com");
@@ -24,5 +32,11 @@ export class QuotesAng2Page {
     element(by.id('email')).sendKeys("mike@mike.com");
     element(by.id('password')).sendKeys("mike1234");
     element(by.buttonText('Submit')).click();
+  }
+
+  addQuote() {
+    element(by.id('content')).sendKeys('This is a quote');
+    element(by.id('author')).sendKeys('Mike');
+    element(by.buttonText('Save')).click();
   }
 }

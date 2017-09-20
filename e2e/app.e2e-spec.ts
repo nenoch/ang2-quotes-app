@@ -8,10 +8,6 @@ describe('quotes-ang2 App', () => {
     page = new QuotesAng2Page();
   });
 
-  afterAll(() => {
-
-  });
-
   it('should display welcome title', () => {
     page.navigateTo('/');
     expect(page.getPageTitle()).toEqual('Welcome');
@@ -25,5 +21,19 @@ describe('quotes-ang2 App', () => {
     page.clickLinkText('Log in');
     page.login();
     expect(page.getPageTitle()).toEqual('Welcome');
+  });
+
+  it('allows users to add new quotes', () => {
+    page.navigateTo('/quotes');
+    page.addQuote();
+    const quotes = page.getNumOfQuotes();
+    expect(quotes).toBe(5);
+  });
+
+  it('allows a user to delete', () => {
+    page.navigateTo('/quotes');
+    page.deleteQuote();
+    const quotes = page.getNumOfQuotes();
+    expect(quotes).toBe(4);
   });
 });
