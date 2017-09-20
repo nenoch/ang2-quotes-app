@@ -1,4 +1,5 @@
 import { QuotesAng2Page } from './app.po';
+import { browser } from 'protractor';
 
 describe('quotes-ang2 App', () => {
   let page: QuotesAng2Page;
@@ -7,8 +8,22 @@ describe('quotes-ang2 App', () => {
     page = new QuotesAng2Page();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+  afterAll(() => {
+
+  });
+
+  it('should display welcome title', () => {
+    page.navigateTo('/');
+    expect(page.getPageTitle()).toEqual('Welcome');
+  });
+
+  it('should allow a user to sign up and log in', () => {
+    page.navigateTo('/');
+    page.clickLinkText('Account');
+    page.clickLinkText('Sign up');
+    page.signUp();
+    page.clickLinkText('Log in');
+    page.login();
+    expect(page.getPageTitle()).toEqual('Welcome');
   });
 });
