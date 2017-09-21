@@ -1,8 +1,8 @@
 <div class="row margin">
   <div class="col-md-6 col-sm-6">
     <blockquote class="blockquote">
-        <p>{{ quote.content }}</p>
-        <footer class='margin'>{{ quote.author }}</footer>
+        <p class="quote-content">{{ quote.content }}</p>
+        <footer class='margin quote-author'>{{ quote.author }}</footer>
         <button *ngIf='belongsToUser()' type='button' class='btn btn-primary' (click)='onDelete()'>Delete</button>
     </blockquote>
   </div>

@@ -13,7 +13,7 @@ describe('quotes-ang2 App', () => {
     expect(page.getPageTitle()).toEqual('Welcome');
   });
 
-  it('should allow a user to sign up and log in', () => {
+  it('allows a user to sign up and log in', () => {
     page.navigateTo('/');
     page.clickLinkText('Account');
     page.clickLinkText('Sign up');
@@ -26,14 +26,31 @@ describe('quotes-ang2 App', () => {
   it('allows users to add new quotes', () => {
     page.navigateTo('/quotes');
     page.addQuote();
-    const quotes = page.getNumOfQuotes();
-    expect(quotes).toBe(5);
+    expect(page.getLastTextOnPage('.quote-content')).toBe('This is a quote.');
   });
 
-  it('allows a user to delete', () => {
+  it('allows a user to log out', () => {
+    page.navigateTo('/');
+    page.clickLinkText('Account');
+    page.clickButtonText('Log out');
+    expect(page.getTextOnPage('.nav.nav-tabs')).toBeTruthy();
+  });
+
+  it('allows anyone to up or downvote a quote', () => {
     page.navigateTo('/quotes');
-    page.deleteQuote();
-    const quotes = page.getNumOfQuotes();
-    expect(quotes).toBe(4);
+    page.clickLastButton('+1');
+    expect(page.getLastTextOnPage('strong')).toBe('1');
+    page.clickLastButton('-1');
+    expect(page.getLastTextOnPage('strong')).toBe('0');
+  });
+
+  it('allows the logged-in owner of a quote to delete it', () => {
+    page.navigateTo('/authentication/login');
+    page.login();
+    browser.sleep(1000);
+    page.navigateTo('/quotes');
+    expect(page.getLastTextOnPage('.quote-content')).toBe('This is a quote.');
+    page.clickLastButton('Delete');
+    expect(page.getLastTextOnPage('.quote-content')).not.toBe('This is a quote.');
   });
 });

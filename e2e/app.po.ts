@@ -9,8 +9,24 @@ export class QuotesAng2Page {
     return element(by.css('app-root h2')).getText();
   }
 
+  getTextOnPage(css) {
+    return element(by.css(css)).getText();
+  }
+
+  getLastTextOnPage(css) {
+    return element.all(by.css(css)).last().getText();
+  }
+
   clickLinkText(text){
     element(by.linkText(text)).click();
+  }
+
+  clickButtonText(text){
+    element(by.buttonText(text)).click();
+  }
+
+  clickLastButton(text){
+    element.all(by.buttonText(text)).last().click();
   }
 
   deleteQuote() {
@@ -22,21 +38,21 @@ export class QuotesAng2Page {
   }
 
   signUp() {
-    element(by.id('username')).sendKeys("mike");
-    element(by.id('email')).sendKeys("mike@mike.com");
-    element(by.id('password')).sendKeys("mike1234");
+    element(by.id('username')).sendKeys("user");
+    element(by.id('email')).sendKeys("user@test.com");
+    element(by.id('password')).sendKeys("1234test");
     element(by.buttonText('Submit')).click();
   }
 
   login() {
-    element(by.id('email')).sendKeys("mike@mike.com");
-    element(by.id('password')).sendKeys("mike1234");
+    element(by.id('email')).sendKeys("user@test.com");
+    element(by.id('password')).sendKeys("1234test");
     element(by.buttonText('Submit')).click();
   }
 
   addQuote() {
-    element(by.id('content')).sendKeys('This is a quote');
-    element(by.id('author')).sendKeys('Mike');
+    element(by.id('content')).sendKeys('This is a quote.');
+    element(by.id('author')).sendKeys('Author');
     element(by.buttonText('Save')).click();
   }
 }

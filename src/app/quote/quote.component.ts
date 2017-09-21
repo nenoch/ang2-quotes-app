@@ -39,6 +39,8 @@ export class QuoteComponent implements OnInit {
   }
 
   belongsToUser(){
+    console.log(localStorage.getItem('userId'));
+    console.log(this.quote.userId);
     return localStorage.getItem('userId') === this.quote.userId;
   }
 
