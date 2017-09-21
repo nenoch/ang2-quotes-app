@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class QuotesService {
-  private quotes: Quote[] = [];
+  quotes: Quote[] = [];
 
   constructor(private http: Http) {}
 

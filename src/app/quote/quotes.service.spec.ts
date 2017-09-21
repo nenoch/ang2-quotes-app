@@ -9,6 +9,10 @@ fdescribe('QuotesService', () => {
   let service:QuotesService;
   let mockBackend;
 
+  beforeAll(()=>{
+    localStorage.setItem('token', 'fakeToken');
+  });
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
@@ -36,7 +40,7 @@ fdescribe('QuotesService', () => {
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           expect(connection.request.method).toBe(RequestMethod.Post);
-          expect(connection.request.url).toBe('http://localhost:3000/quote');
+          expect(connection.request.url).toBe('http://localhost:3000/quote/?token=fakeToken');
           connection.mockRespond(new Response(
             new ResponseOptions({ body:
               {
@@ -145,17 +149,12 @@ fdescribe('QuotesService', () => {
   describe('#deleteQuote', () => {
     it('should delete quote', fakeAsync(() => {
       let quote = new Quote("test content 1.", "Author One", "01", 1);
-      let quotes = [
-        new Quote("test content 1.", "Author One", "01", 1),
-        new Quote("test content 2.", "Author Two", "02", 2)
-      ];
-
-      // console.log("before mock", quotes);
+      let quote2 = new Quote("test content 2.", "Author Two", "02", 2);
 
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           expect(connection.request.method).toBe(RequestMethod.Delete);
-          expect(connection.request.url).toBe(`http://localhost:3000/quote/${quote.quoteId}`);
+          expect(connection.request.url).toBe(`http://localhost:3000/quote/${quote.quoteId}/?token=fakeToken`);
           connection.mockRespond(new Response(
             new ResponseOptions({ body:
               {
@@ -166,15 +165,14 @@ fdescribe('QuotesService', () => {
           ));
       });
 
-      // service.quotes = quotes;
-      // console.log("after assignment",service.quotes);
+      service.quotes.push(quote);
+      service.quotes.push(quote2);
+
       service.deleteQuote(quote).subscribe(res => {
         expect(res).toBeDefined();
         expect(res.message).toEqual('Test Quote deleted');
-        // expect(service.quotes).not.toContain(quote);
+        expect(service.quotes).not.toContain(quote);
       });
-
-      // console.log("after function", service.quotes);
     }))
   });
 
