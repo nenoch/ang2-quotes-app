@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -9,6 +9,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { QuotesPageComponent } from './quotes-page/quotes-page.component';
 import { InspirationComponent } from './inspiration/inspiration.component';
 import { AuthenticationComponent } from './auth/authentication/authentication.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 import { routing } from './app.routes';
 import { QuoteComponent } from './quote/quote.component';
@@ -17,9 +18,6 @@ import { ApiService } from './inspiration/api.service';
 import { AuthService } from './auth/auth.service';
 import { FilterSearchPipe } from './filter-search.pipe';
 import { PopularPipe } from './popular.pipe';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
-import { LogoutComponent } from './auth/logout/logout.component';
 import { QuoteInputComponent } from './quote-input/quote-input.component';
 
 @NgModule({
@@ -33,15 +31,12 @@ import { QuoteInputComponent } from './quote-input/quote-input.component';
     FilterSearchPipe,
     PopularPipe,
     AuthenticationComponent,
-    SignupComponent,
-    LoginComponent,
-    LogoutComponent,
-    QuoteInputComponent
+    QuoteInputComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpModule,
     routing
   ],
